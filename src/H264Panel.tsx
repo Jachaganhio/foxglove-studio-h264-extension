@@ -63,7 +63,9 @@ function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Elem
               if (
                 headerAndDataMessage.message &&
                 headerAndDataMessage.message.data_blocks &&
+                Array.isArray(headerAndDataMessage.message.data_blocks) &&
                 headerAndDataMessage.message.data_blocks.length > 0 &&
+                headerAndDataMessage.message.data_blocks[0] &&
                 headerAndDataMessage.message.data_blocks[0].data instanceof Uint8Array
               ) {
                 setImageData(headerAndDataMessage.message.data_blocks[0].data);
