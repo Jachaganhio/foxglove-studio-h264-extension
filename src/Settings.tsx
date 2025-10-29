@@ -21,9 +21,12 @@ type UseH264StateType = {
 const useH264State = (context: PanelExtensionContext): UseH264StateType => {
   const [topics, setTopics] = useState<readonly Topic[] | undefined>();
 
-  // Filter all of our topics to find the ones with a CompresssedImage message.
+  // Filter topics to find ones with CompressedImage or HeaderAndData messages
   const imageTopics = useMemo(
-    () => (topics ?? []).filter((topic) => topic.datatype === "sensor_msgs/CompressedImage"),
+    () => (topics ?? []).filter((topic) => 
+      topic.datatype === "sensor_msgs/CompressedImage" || 
+      topic.datatype === "mcapsdk.HeaderAndData"
+    ),
     [topics],
   );
 
