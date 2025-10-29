@@ -51,13 +51,13 @@ function ExamplePanel({ context }: { context: PanelExtensionContext }): JSX.Elem
         renderState.currentFrame.forEach((f) => {
           try {
             // 检查消息类型并提取相应的数据
-            if (f.schemaName === "sensor_msgs/CompressedImage") {
+            if (f.schemaName === "sensor_msgs/CompressedImage" || f.topic?.datatype === "sensor_msgs/CompressedImage") {
               // 处理CompressedImage类型
               const imageMessage = f as ImageMessage;
               if (imageMessage.message && imageMessage.message.data instanceof Uint8Array) {
                 setImageData(imageMessage.message.data);
               }
-            } else if (f.schemaName === "mcapsdk.HeaderAndData") {
+            } else if (f.schemaName === "mcapsdk.HeaderAndData" || f.topic?.datatype === "mcapsdk.HeaderAndData") {
               // 处理HeaderAndData类型
               const headerAndDataMessage = f as HeaderAndDataMessage;
               if (
